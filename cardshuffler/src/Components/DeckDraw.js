@@ -5,6 +5,8 @@ const RenderCard = props => {
     props.card.name
   }_of_${props.card.suit}.png/?raw=true`;
 
+  //TODO: Get in spinners or await loading for all cards.
+
   return (
     <div>
       <div className="card">
