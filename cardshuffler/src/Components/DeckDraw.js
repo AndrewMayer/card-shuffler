@@ -7,12 +7,14 @@ const RenderCard = props => {
 
   return (
     <div>
-      <div className="ui card">
-        <div className="image">
-          <img src={cardImage} alt="playing card image" />
+      <div className="card">
+        <div className="image ui tiny">
+          <img src={cardImage} alt="playing card" />
         </div>
-        <div className="header">
-          {props.card.name} of {props.card.suit}
+        <div className="content">
+          <div className="header">
+            {props.card.name} of {props.card.suit}
+          </div>
         </div>
       </div>
     </div>
@@ -28,13 +30,7 @@ class DeckDraw extends React.Component {
         </div>
       );
     });
-    return (
-      <div className="ui grid centered">
-        <div className="three wide column">
-          <div>{allCards}</div>
-        </div>
-      </div>
-    );
+    return <div className="ui centered cards">{allCards}</div>;
   }
 }
 
