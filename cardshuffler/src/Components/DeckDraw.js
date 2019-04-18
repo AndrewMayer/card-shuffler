@@ -1,4 +1,6 @@
 import React from 'react';
+import Img from 'react-image';
+import Spinner from './Spinner';
 
 class RenderCard extends React.Component {
   constructor(props) {
@@ -9,32 +11,19 @@ class RenderCard extends React.Component {
         props.card.name
       }_of_${props.card.suit}.png/?raw=true`,
       cardName: props.card.name,
-      cardSuit: props.card.suit
+      cardSuit: props.card.suit,
+      id: props.card.id
     };
-  }
-
-  handleImageLoaded() {
-    this.setState({ imageStatus: '' });
-  }
-
-  handleImageErrored() {
-    this.setState({ imageStatus: 'failed to load' });
   }
 
   //TODO: Add in a spinner component for loading cards. Will need to set status to true and run elements.
 
   render() {
     return (
-      <div>
+      <div key={this.state.id}>
         <div className="card">
-          <div className="image ui tiny">
-            <img
-              src={this.state.cardImage}
-              alt="playing card"
-              onLoad={() => this.handleImageLoaded()}
-              onError={() => this.handleImageErrored()}
-            />
-            {this.state.imageStatus}
+          <div className="image ui tiny" style={{ border: '1px solid black' }}>
+            <Img src={this.state.cardImage} loader={<Spinner />} />
           </div>
           <div className="content">
             <div className="header">
@@ -50,8 +39,9 @@ class RenderCard extends React.Component {
 class DeckDraw extends React.Component {
   render() {
     const allCards = this.props.cards.map(card => {
+      console.log(card.id);
       return (
-        <div>
+        <div key={card.id}>
           <RenderCard card={card} />
         </div>
       );

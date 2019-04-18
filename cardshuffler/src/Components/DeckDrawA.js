@@ -28,7 +28,7 @@ class DeckDraw extends React.Component {
     const allCards = this.props.cards.map(card => {
       return (
         <div>
-          <RenderCard card={card} />
+          <RenderCard key={card.id} card={card} />
         </div>
       );
     });
