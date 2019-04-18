@@ -1,27 +1,51 @@
 import React from 'react';
 
-const RenderCard = props => {
-  let cardImage = `https://github.com/hayeah/playing-cards-assets/blob/master/png/${
-    props.card.name
-  }_of_${props.card.suit}.png/?raw=true`;
+class RenderCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      imageStatus: 'loading',
+      cardImage: `https://github.com/hayeah/playing-cards-assets/blob/master/png/${
+        props.card.name
+      }_of_${props.card.suit}.png/?raw=true`,
+      cardName: props.card.name,
+      cardSuit: props.card.suit
+    };
+  }
 
-  //TODO: Get in spinners or await loading for all cards.
+  handleImageLoaded() {
+    this.setState({ imageStatus: '' });
+  }
 
-  return (
-    <div>
-      <div className="card">
-        <div className="image ui tiny">
-          <img src={cardImage} alt="playing card" />
-        </div>
-        <div className="content">
-          <div className="header">
-            {props.card.name} of {props.card.suit}
+  handleImageErrored() {
+    this.setState({ imageStatus: 'failed to load' });
+  }
+
+  //TODO: Add in a spinner component for loading cards. Will need to set status to true and run elements.
+
+  render() {
+    return (
+      <div>
+        <div className="card">
+          <div className="image ui tiny">
+            <img
+              src={this.state.cardImage}
+              alt="playing card"
+              onLoad={() => this.handleImageLoaded()}
+              onError={() => this.handleImageErrored()}
+            />
+            {this.state.imageStatus}
+          </div>
+          <div className="content">
+            <div className="header">
+              {this.state.cardName} of {this.state.cardSuit}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 class DeckDraw extends React.Component {
   render() {
