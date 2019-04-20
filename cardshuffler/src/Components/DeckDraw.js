@@ -39,7 +39,6 @@ class RenderCard extends React.Component {
 class DeckDraw extends React.Component {
   render() {
     const allCards = this.props.cards.map(card => {
-      console.log(card.id);
       return (
         <div key={card.id}>
           <RenderCard card={card} />
