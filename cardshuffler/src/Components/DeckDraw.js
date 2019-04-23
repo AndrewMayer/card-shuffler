@@ -38,14 +38,20 @@ class RenderCard extends React.Component {
 
 class DeckDraw extends React.Component {
   render() {
-    const allCards = this.props.cards.map(card => {
-      return (
-        <div key={card.id}>
-          <RenderCard card={card} />
-        </div>
-      );
-    });
-    return <div className="ui centered cards">{allCards}</div>;
+    const allCards = this.props.cards
+      .slice(0, this.props.handSize)
+      .map(card => {
+        return (
+          <div className="three wide column" key={card.id}>
+            <RenderCard card={card} />
+          </div>
+        );
+      });
+    return (
+      <div>
+        <div className="ui grid">{allCards}</div>
+      </div>
+    );
   }
 }
 
