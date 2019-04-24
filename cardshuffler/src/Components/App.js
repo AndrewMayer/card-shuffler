@@ -15,9 +15,12 @@ function shuffleArray(array) {
 class App extends Component {
   state = {
     doDraw: false,
+    cutDeck: false,
     activeDeck: playingCards,
     handSize: 5
   };
+
+  //Callbacks
 
   drawCards = () => {
     // this.setState({ doDraw: true });
@@ -34,19 +37,25 @@ class App extends Component {
   };
 
   changeHandSize = newSize => {
-    console.log(newSize);
     return this.setState({ handSize: newSize });
+  };
+
+  cutSwitch = () => {
+    return this.setState({ cutDeck: !this.state.cutDeck });
   };
 
   render() {
     return (
       <div className="ui container center aligned">
         <h1 className="App-header ui header">Card Shuffler</h1>
-        <CardDeck changeHandSize={this.changeHandSize} />
+        <CardDeck cutDeck={this.state.cutDeck} />
         <ButtonSet
-          drawCards={this.drawCards}
           doDraw={this.state.doDraw}
+          cutDeck={this.state.cutDeck}
+          drawCards={this.drawCards}
           deckRandomizer={this.deckRandomizer}
+          changeHandSize={this.changeHandSize}
+          cutSwitch={this.cutSwitch}
         />
         <div className="ui divider" />
         <div>

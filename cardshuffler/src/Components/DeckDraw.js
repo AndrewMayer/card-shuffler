@@ -16,18 +16,16 @@ class RenderCard extends React.Component {
     };
   }
 
-  //TODO: Add in a spinner component for loading cards. Will need to set status to true and run elements.
-
   render() {
     return (
       <div key={this.state.id}>
-        <div className="card">
-          <div className="image ui tiny" style={{ border: '1px solid black' }}>
+        <div className="ui fluid card">
+          <div className="center image ui small">
             <Img src={this.state.cardImage} loader={<Spinner />} />
           </div>
           <div className="content">
-            <div className="header">
-              {this.state.cardName} of {this.state.cardSuit}
+            <div className="center aligned header">
+              {this.state.cardName} of <br /> {this.state.cardSuit}
             </div>
           </div>
         </div>
@@ -42,14 +40,14 @@ class DeckDraw extends React.Component {
       .slice(0, this.props.handSize)
       .map(card => {
         return (
-          <div className="three wide column" key={card.id}>
+          <div className="two wide column" key={card.id}>
             <RenderCard card={card} />
           </div>
         );
       });
     return (
       <div>
-        <div className="ui grid">{allCards}</div>
+        <div className="ui grid centered">{allCards}</div>
       </div>
     );
   }
